@@ -3,7 +3,13 @@
   <table>
     <tr>
       <td>Amount:</td>
-      <td><%= number_to_currency(transaction.amount) %></td>
+      <td>
+        <% if transaction.amount > 0 %>
+          +<%= number_to_currency(transaction.amount) %>
+        <% else %>
+          <%= number_to_currency(transaction.amount) %>
+        <% end %>
+      </td>
     </tr>
     <% if transaction.action=='purchase' || transaction.action=='sale' %>
       <tr>
