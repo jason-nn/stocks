@@ -108,6 +108,11 @@ a {
   border-radius: 100px;
 }
 
+.signout:hover {
+  background-color: #4f42ec;
+  color: white;
+}
+
 .notice {
   font-family: 'CircularStd-Bold';
   position: fixed;
@@ -146,4 +151,64 @@ td {
 h1,
 h2 {
   font-family: 'CircularStd-Bold';
+}
+
+.authwrapper {
+  width: 100%;
+  height: calc(100vh - 80px - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type='email'],
+input[type='text'],
+input[type='password'] {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 0.5em 2em;
+  margin: 0.5em 0em;
+  cursor: pointer;
+  width: 250px;
+}
+
+input[type='email']:focus,
+input[type='text']:focus,
+input[type='password']:focus {
+  outline: none;
+  border: 1px solid #4f42ec;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+}
+
+.checkboxfield {
+  display: none;
+}
+
+.password {
+  display: inline-block;
+}
+
+input[type='submit'] {
+  border: 1px solid #4f42ec;
+  padding: 0.5em 2em;
+  background-color: #4f42ec;
+  color: white;
+  margin: 20px 0px;
+  cursor: pointer;
+}
+
+input[type='submit']:hover {
+  background-color: white;
+  color: #4f42ec;
+}
+
+.authbox {
+  border: 1px solid #4f42ec;
+  padding: 60px;
+  margin: 20px 0px;
+  background-color: white;
 }
