@@ -7,7 +7,7 @@ class Transaction < ApplicationRecord
 
   validates :action,
             inclusion: {
-              in: ['cash in', 'buy', 'sell'],
+              in: ['cash in', 'purchase', 'sale'],
               message: '%{value} is not a valid action',
             }
 end

@@ -1,0 +1,33 @@
+<div class="box">
+  <h2><%= transaction.action.titlecase %></h2>
+  <table>
+    <tr>
+      <td>Amount:</td>
+      <td><%= number_to_currency(transaction.amount) %></td>
+    </tr>
+    <% if transaction.action=='purchase' || transaction.action=='sale' %>
+      <tr>
+        <td>Stock:</td>
+        <td><%= transaction.stock %></td>
+      </tr>
+      <tr>
+        <td>Quantity:</td>
+        <td><%= transaction.quantity %></td>
+      </tr>
+    <% end %>
+    <% if current_user.admin %>
+      <tr>
+        <td>User:</td>
+        <td><%= transaction.user.email %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>Date:</td>
+      <td><%= transaction.created_at.localtime.to_s.split(" ")[0] %></td>
+    </tr>
+    <tr>
+      <td>Time:</td>
+      <td><%= transaction.created_at.localtime.to_s.split(" ")[1] %></td>
+    </tr>
+  </table>
+</div>

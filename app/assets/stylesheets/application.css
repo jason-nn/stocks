@@ -131,3 +131,19 @@ a {
   background-color: #ea4435;
   color: white;
 }
+
+.box {
+  border: 1px solid #4f42ec;
+  padding: 30px;
+  margin: 20px 0px;
+  background-color: white;
+}
+
+td {
+  padding: 10px 30px 0px 0px;
+}
+
+h1,
+h2 {
+  font-family: 'CircularStd-Bold';
+}

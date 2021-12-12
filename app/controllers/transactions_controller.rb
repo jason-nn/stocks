@@ -4,9 +4,10 @@ class TransactionsController < ApplicationController
 
   def index
     if current_user.admin
-      @transactions = Transaction.all
+      @transactions = Transaction.all.order('created_at DESC')
     else
-      @transactions = Transaction.where(user_id: @user_id)
+      @transactions =
+        Transaction.where(user_id: @user_id).order('created_at DESC')
     end
   end
 
