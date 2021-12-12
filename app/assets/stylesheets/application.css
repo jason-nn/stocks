@@ -170,6 +170,7 @@ input[type='password'] {
   margin: 0.5em 0em;
   cursor: pointer;
   width: 250px;
+  font-size: 1rem;
 }
 
 input[type='email']:focus,
@@ -199,6 +200,7 @@ input[type='submit'] {
   color: white;
   margin: 20px 0px;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 input[type='submit']:hover {
@@ -208,7 +210,7 @@ input[type='submit']:hover {
 
 .authbox {
   border: 1px solid #4f42ec;
-  padding: 60px;
+  padding: 50px;
   margin: 20px 0px;
   background-color: white;
 }
