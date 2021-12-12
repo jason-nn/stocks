@@ -246,3 +246,7 @@ img {
   background-color: white;
   color: #4f42ec;
 }
+
+.width300px {
+  width: 300px;
+}
