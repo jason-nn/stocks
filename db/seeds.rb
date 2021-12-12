@@ -6,25 +6,44 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-admin = User.create(email: 'jason@admin.com', password: 'password', admin: true)
-admin.transactions.create(action: 'cash in', amount: 1000)
+admin =
+  User.create(
+    email: 'admin@stocks.com',
+    password: 'password',
+    admin: true,
+    approved: true,
+  )
+
 jason =
   User.create(
-    email: 'jason.ho@obf.ateneo.edu',
+    email: 'jason@stocks.com',
     password: 'password',
     admin: false,
     approved: true,
   )
+
+pg =
+  User.create(
+    email: 'pg@stocks.com',
+    password: 'password',
+    admin: false,
+    approved: false,
+  )
+
+admin.transactions.create(action: 'cash in', amount: 1000)
+
 jason.transactions.create(action: 'cash in', amount: 2000)
+
 jason.transactions.create(
   action: 'purchase',
   amount: -420.69,
   stock: 'TSLA',
   quantity: 2,
 )
+
 jason.transactions.create(
   action: 'sale',
-  amount: +690,
+  amount: 300,
   stock: 'TSLA',
   quantity: 1,
 )
