@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
   def index
-    @users = User.where(admin: false).order('created_at DESC')
+    if current_user.admin
+      @users = User.where(admin: false).order('created_at DESC')
+    else
+      redirect_to root_path
+    end
   end
 end
