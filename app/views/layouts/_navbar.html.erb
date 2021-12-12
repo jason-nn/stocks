@@ -1,0 +1,20 @@
+<div class='navbar'>
+  <div class="navleft">
+    <img src='/images/dollar.svg'/>
+    <span>stocks.</span>
+  </div>
+  <div class="navright">
+    <% if user_signed_in? %>
+      <%= link_to 'Transactions', root_path %>
+      <% if current_user.admin %>
+        <%= link_to 'Users', root_path %>
+      <% else %>
+        <%= link_to 'Portfolio', root_path %>
+        <%= link_to 'Buy', root_path %>
+        <%= link_to 'Sell', root_path %>
+        <%= link_to 'Account', root_path %>
+      <% end %>
+      <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, :class => 'signout' %>
+    <% end %>
+  </div>
+</div>
