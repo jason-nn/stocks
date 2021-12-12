@@ -7,4 +7,6 @@ class User < ApplicationRecord
          :rememberable,
          :validatable,
          :confirmable
+
+  has_many :transactions
 end
