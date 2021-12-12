@@ -1,0 +1,35 @@
+<% if user.approved %>
+  <div class="smallerbox">
+    <table>
+      <tr>
+        <td>
+          <img src='/images/thumb-up.svg'/>
+        </td>
+        <td>
+          <span class="marginright30">
+            <%= user.email %>
+          </span>
+        </td>
+        <td><%= link_to 'Details', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+      </tr>
+    </table>
+  </div>
+<% else %>
+  <div class="box">
+    <table>
+      <tr>
+        <td>
+          <div style="width: 60px;"></div>
+        </td>
+        <td>
+          <span class="marginright30">
+            <%= user.email %>
+          </span>
+        </td>
+        <td><%= link_to 'Details', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+      </tr>
+    </table>
+  </div>
+<% end %>

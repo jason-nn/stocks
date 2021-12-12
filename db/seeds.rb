@@ -13,6 +13,7 @@ jason =
     email: 'jason.ho@obf.ateneo.edu',
     password: 'password',
     admin: false,
+    approved: true,
   )
 jason.transactions.create(action: 'cash in', amount: 2000)
 jason.transactions.create(
