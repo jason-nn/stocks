@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   resources :users
   resources :transactions
+
+  get '/account', to: 'users#account'
 end

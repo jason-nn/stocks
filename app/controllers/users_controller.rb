@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user_id
-  before_action :check_admin
+  before_action :check_admin, only: %i[index show new create edit update]
   before_action :set_user, only: %i[show edit update]
 
   def index
@@ -17,6 +17,10 @@ class UsersController < ApplicationController
   def edit; end
 
   def update; end
+
+  def account
+    @balance = Transaction.where(user_id: @user_id).pluck(:amount).sum
+  end
 
   private
 
