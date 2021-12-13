@@ -33,7 +33,7 @@ pg =
     name: 'Paul Graham',
   )
 
-admin.transactions.create(action: 'cash in', amount: 1000)
+pg.transactions.create(action: 'cash in', amount: 1000)
 
 jason.transactions.create(action: 'cash in', amount: 2000)
 
