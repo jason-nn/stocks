@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user_id
   before_action :check_admin, only: %i[index show new create edit update]
+  before_action :check_non_admin, only: %i[account]
   before_action :set_user, only: %i[show edit update]
 
   def index
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
 
   def account
     @balance = Transaction.where(user_id: @user_id).pluck(:amount).sum
+    @user = current_user
   end
 
   private
@@ -34,6 +36,10 @@ class UsersController < ApplicationController
 
   def check_admin
     redirect_to root_path if !current_user.admin
+  end
+
+  def check_non_admin
+    redirect_to root_path if current_user.admin
   end
 
   # Only allow a list of trusted parameters through.
