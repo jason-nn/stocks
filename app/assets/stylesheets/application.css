@@ -222,13 +222,9 @@ img {
 
 .smallerbox {
   border: 1px solid #4f42ec;
-  padding: 8px 30px;
+  padding: 10px 30px;
   margin: 20px 0px;
   background-color: white;
-}
-
-.marginright30 {
-  margin-right: 30px;
 }
 
 .button {
@@ -247,6 +243,18 @@ img {
   color: #4f42ec;
 }
 
-.width300px {
-  width: 300px;
+.width200px {
+  width: 200px;
+}
+
+.green {
+  color: #00cc7d;
+}
+
+.red {
+  color: #ea4435;
+}
+
+.enlarge {
+  font-size: 1.2em;
 }

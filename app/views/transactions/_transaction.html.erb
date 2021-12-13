@@ -5,9 +5,13 @@
       <td>Amount:</td>
       <td>
         <% if transaction.amount > 0 %>
-          +<%= number_to_currency(transaction.amount) %>
+          <span class="green">
+            +<%= number_to_currency(transaction.amount) %>
+          </span>
         <% else %>
-          <%= number_to_currency(transaction.amount) %>
+          <span class="red">
+            <%= number_to_currency(transaction.amount) %>
+          </span>
         <% end %>
       </td>
     </tr>
@@ -24,7 +28,7 @@
     <% if current_user.admin %>
       <tr>
         <td>User:</td>
-        <td><%= transaction.user.email %></td>
+        <td><%= transaction.user.name %></td>
       </tr>
     <% end %>
     <tr>

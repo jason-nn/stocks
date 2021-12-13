@@ -12,6 +12,7 @@ admin =
     password: 'password',
     admin: true,
     approved: true,
+    name: 'Admin',
   )
 
 jason =
@@ -20,6 +21,7 @@ jason =
     password: 'password',
     admin: false,
     approved: true,
+    name: 'Jason Ho',
   )
 
 pg =
@@ -28,6 +30,7 @@ pg =
     password: 'password',
     admin: false,
     approved: false,
+    name: 'Paul Graham',
   )
 
 admin.transactions.create(action: 'cash in', amount: 1000)
