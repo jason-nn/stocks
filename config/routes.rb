@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :transactions
 
   get '/account', to: 'users#account'
+  get '/cashin', to: 'transactions#cashin'
 end

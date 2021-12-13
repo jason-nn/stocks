@@ -4,5 +4,7 @@
   <h1 class="purple">
     <%= number_to_currency(@balance) %>
   </h1>
+  <br>
+  <%= link_to 'Cash In', cashin_path, :class => 'button' %>
 </div>
 <%= render 'users/show', user: @user %>
