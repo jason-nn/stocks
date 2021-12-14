@@ -1,6 +1,6 @@
 <div class="box">
   <h2>Cash In</h2>
-  <%= form_with(model: @transaction) do |f| %>
+  <%= form_with(model: @transaction, url: "/cashin") do |f| %>
     <div>
       <%= f.label :amount, "Amount in USD" %>
       <%= f.number_field :amount, step: 0.01 %>

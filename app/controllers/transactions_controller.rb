@@ -12,8 +12,12 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def create
-    @transaction = Transaction.new(cashin_transaction_params)
+  def cashin
+    @transaction = Transaction.new
+  end
+
+  def cashin_post
+    @transaction = Transaction.new(cashin_params)
 
     if @transaction.save
       redirect_to account_path,
@@ -23,10 +27,6 @@ class TransactionsController < ApplicationController
     else
       redirect_to cashin_path, alert: 'Invalid amount.'
     end
-  end
-
-  def cashin
-    @transaction = Transaction.new
   end
 
   private
@@ -43,7 +43,7 @@ class TransactionsController < ApplicationController
     redirect_to root_path if current_user.admin
   end
 
-  def cashin_transaction_params
+  def cashin_params
     params
       .require(:transaction)
       .permit(:amount, :action, :stock, :quantity)

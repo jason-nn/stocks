@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   get '/account', to: 'users#account'
   get '/cashin', to: 'transactions#cashin'
+  post '/cashin', to: 'transactions#cashin_post'
 end
