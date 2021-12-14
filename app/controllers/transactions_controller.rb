@@ -12,7 +12,22 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def cashin; end
+  def create
+    @transaction = Transaction.new(cashin_transaction_params)
+
+    if @transaction.save
+      redirect_to account_path,
+                  notice:
+                    'Successfully added ' +
+                      view_context.number_to_currency(@transaction.amount)
+    else
+      redirect_to cashin_path, alert: 'Invalid amount.'
+    end
+  end
+
+  def cashin
+    @transaction = Transaction.new
+  end
 
   private
 
@@ -26,5 +41,12 @@ class TransactionsController < ApplicationController
 
   def check_non_admin
     redirect_to root_path if current_user.admin
+  end
+
+  def cashin_transaction_params
+    params
+      .require(:transaction)
+      .permit(:amount, :action, :stock, :quantity)
+      .merge(user_id: @user_id, action: 'cash in')
   end
 end

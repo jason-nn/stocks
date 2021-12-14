@@ -163,7 +163,8 @@ h2 {
 
 input[type='email'],
 input[type='text'],
-input[type='password'] {
+input[type='password'],
+input[type='number'] {
   background-color: white;
   border: 1px solid #ccc;
   padding: 0.5em 2em;

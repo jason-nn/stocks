@@ -1,3 +1,13 @@
 <div class="box">
   <h2>Cash In</h2>
+  <%= form_with(model: @transaction) do |f| %>
+    <div>
+      <%= f.label :amount, "Amount in USD" %>
+      <%= f.number_field :amount, step: 0.01 %>
+    </div>
+    <div>
+      <%= f.submit "Cash In" %>
+    </div>
+  <% end %>
 </div>
+<%= link_to 'Back', account_path, :class => 'button' %>
