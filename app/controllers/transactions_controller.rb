@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user_id
-  before_action :check_non_admin, only: %i[cashin]
+  before_action :check_non_admin, only: %i[cashin cashin_post]
 
   def index
     if current_user.admin
