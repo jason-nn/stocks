@@ -2,6 +2,16 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user_id
   before_action :check_non_admin, only: %i[cashin cashin_post]
+  before_action :set_client,
+                only: %i[
+                  buy
+                  purchase
+                  purchase_post
+                  sell
+                  sale
+                  sale_post
+                  portfolio
+                ]
 
   def index
     if current_user.admin
@@ -29,6 +39,30 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def buy
+    # @companies = %w[AAPL ABNB AMZN GOOG GRAB MSFT TSLA UBER]
+    # @companies = %w[AAPL TSLA UBER]
+    @companies = %w[AAPL UBER]
+  end
+
+  def purchase
+    @company = params[:company]
+    @price =
+      view_context.number_to_currency(
+        (params[:price] + '.' + params[:format]).to_f,
+      )
+  end
+
+  def purchase_post; end
+
+  def sell; end
+
+  def sale; end
+
+  def sale_post; end
+
+  def portfolio; end
+
   private
 
   def set_user_id
@@ -48,5 +82,14 @@ class TransactionsController < ApplicationController
       .require(:transaction)
       .permit(:amount, :action, :stock, :quantity)
       .merge(user_id: @user_id, action: 'cash in')
+  end
+
+  def set_client
+    @client =
+      IEX::Api::Client.new(
+        publishable_token: 'Tsk_006d6aef7d2c42b389a9e6aa87636847',
+        secret_token: 'Tpk_d2717c1f6e6e4837a40e8753fd3836be',
+        endpoint: 'https://sandbox.iexapis.com/v1',
+      )
   end
 end
