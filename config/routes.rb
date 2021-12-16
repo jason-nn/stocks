@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   post '/cashin', to: 'transactions#cashin_post'
   get 'buy', to: 'transactions#buy'
   get 'purchase/:company/:price', to: 'transactions#purchase'
+  post 'purchase/:company/:price', to: 'transactions#purchase_post'
 end

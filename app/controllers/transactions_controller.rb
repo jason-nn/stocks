@@ -12,6 +12,7 @@ class TransactionsController < ApplicationController
                   sale_post
                   portfolio
                 ]
+  before_action :set_balance, only: %i[purchase_post]
 
   def index
     if current_user.admin
@@ -41,19 +42,39 @@ class TransactionsController < ApplicationController
 
   def buy
     # @companies = %w[AAPL ABNB AMZN GOOG GRAB MSFT TSLA UBER]
-    # @companies = %w[AAPL TSLA UBER]
-    @companies = %w[AAPL UBER]
+    @companies = %w[AAPL TSLA UBER]
   end
 
   def purchase
     @company = params[:company]
-    @price =
-      view_context.number_to_currency(
-        (params[:price] + '.' + params[:format]).to_f,
-      )
+    @price = (params[:price].to_s + '.' + params[:format].to_s).to_f
+    @transaction = Transaction.new
   end
 
-  def purchase_post; end
+  def purchase_post
+    @price = (params[:price].to_s + '.' + params[:format].to_s).to_f
+    @quantity = params[:transaction][:quantity].to_i
+    @transaction = Transaction.new(purchase_params)
+
+    @transaction.stock = params[:company]
+    @transaction.quantity = @quantity
+    @transaction.amount = @price * @quantity * -1
+
+    if @balance + @transaction.amount >= 0
+      if @transaction.save
+        redirect_to root_path,
+                    notice:
+                      'Successfully purchased ' + @transaction.quantity.to_s +
+                        ' ' + @transaction.stock + ' stock '
+      else
+        redirect_to '/purchase/' + params[:company] + '/' + @price.to_s,
+                    alert: 'Invalid amount.'
+      end
+    else
+      redirect_to '/purchase/' + params[:company] + '/' + @price.to_s,
+                  alert: 'Insufficient funds.'
+    end
+  end
 
   def sell; end
 
@@ -80,8 +101,19 @@ class TransactionsController < ApplicationController
   def cashin_params
     params
       .require(:transaction)
-      .permit(:amount, :action, :stock, :quantity)
+      .permit(:amount)
       .merge(user_id: @user_id, action: 'cash in')
+  end
+
+  def purchase_params
+    params
+      .require(:transaction)
+      .permit(:quantity)
+      .merge(user_id: @user_id, action: 'purchase')
+  end
+
+  def set_balance
+    @balance = Transaction.where(user_id: @user_id).pluck(:amount).sum
   end
 
   def set_client
