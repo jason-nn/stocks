@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :check_admin, only: %i[index show new create edit update]
   before_action :check_non_admin, only: %i[account]
   before_action :set_user, only: %i[show edit update]
+  before_action :set_client, only: %i[portfolio]
 
   def index
     @users = User.where(admin: false).order('created_at DESC')
@@ -24,6 +25,30 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  def portfolio
+    @transactions = Transaction.where(user_id: 2).where.not(action: 'cash in')
+
+    portfolio = {}
+
+    @transactions.each do |transaction|
+      if portfolio[transaction.stock]
+        if transaction.action = 'purchase'
+          portfolio[transaction.stock] += transaction.quantity
+        elsif transaction.action = 'sale'
+          portfolio[transaction.stock] -= transaction.quantity
+        end
+      else
+        if transaction.action = 'purchase'
+          portfolio[transaction.stock] = transaction.quantity
+        elsif transaction.action = 'sale'
+          portfolio[transaction.stock] = -transaction.quantity
+        end
+      end
+    end
+
+    @portfolio = portfolio
+  end
+
   private
 
   def set_user_id
@@ -42,11 +67,19 @@ class UsersController < ApplicationController
     redirect_to root_path if current_user.admin
   end
 
-  # Only allow a list of trusted parameters through.
   def user_params
     params
       .require(:user)
       .permit(:email, :password, :password_confirmation, :admin, :approved)
       .merge(user_id: @user_id)
+  end
+
+  def set_client
+    @client =
+      IEX::Api::Client.new(
+        publishable_token: 'Tsk_006d6aef7d2c42b389a9e6aa87636847',
+        secret_token: 'Tpk_d2717c1f6e6e4837a40e8753fd3836be',
+        endpoint: 'https://sandbox.iexapis.com/v1',
+      )
   end
 end

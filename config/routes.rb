@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   get 'buy', to: 'transactions#buy'
   get 'purchase/:company/:price', to: 'transactions#purchase'
   post 'purchase/:company/:price', to: 'transactions#purchase_post'
+  get 'portfolio', to: 'users#portfolio'
 end

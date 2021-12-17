@@ -1,0 +1,28 @@
+<h1>Portfolio</h1>
+<% @portfolio.each do |stock, quantity| %>
+  <div class="box">
+    <h2><%= stock %></h2>
+    <br>
+    <% details = @client.quote(stock) %>
+    <h1 class='purple'><%= number_to_currency(details.latest_price * quantity) %></h1>
+    <br>
+    <table>
+      <tr>
+        <td>
+          Quantity: 
+        </td>
+        <td>
+          <%= quantity %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Latest Price: 
+        </td>
+        <td>
+          <%= number_to_currency(details.latest_price) %>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>

@@ -1,21 +1,31 @@
 <div class="box">
   <h2>
     <%= transaction.action.titlecase %>
-    <% if transaction.amount > 0 %>
-      <span class="green">
-        &nbsp;&nbsp;+<%= number_to_currency(transaction.amount) %>
-      </span>
-    <% else %>
-      <span class="red">
-        &nbsp;&nbsp;<%= number_to_currency(transaction.amount) %>
-      </span>
-    <% end %>
   </h2>
+  <br>
+  <% if transaction.amount > 0 %>
+    <h1 class="green">
+      +<%= number_to_currency(transaction.amount) %>
+    </h1>
+  <% else %>
+    <h1 class="red">
+      <%= number_to_currency(transaction.amount) %>
+    </h1>
+  <% end %>
+  <br>
   <table>
     <% if transaction.action=='purchase' || transaction.action=='sale' %>
       <tr>
         <td>Stock:</td>
         <td><%= transaction.stock %></td>
+      </tr>
+      <tr>
+        <% if transaction.action=='purchase' %>
+          <td>Purchase Price:</td>
+        <% else %>
+          <td>Sale Price:</td>
+        <% end %>
+        <td><%= number_to_currency((transaction.amount / transaction.quantity).abs) %></td>
       </tr>
       <tr>
         <td>Quantity:</td>

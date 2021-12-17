@@ -3,15 +3,7 @@ class TransactionsController < ApplicationController
   before_action :set_user_id
   before_action :check_non_admin, only: %i[cashin cashin_post]
   before_action :set_client,
-                only: %i[
-                  buy
-                  purchase
-                  purchase_post
-                  sell
-                  sale
-                  sale_post
-                  portfolio
-                ]
+                only: %i[buy purchase purchase_post sell sale sale_post]
   before_action :set_balance, only: %i[purchase_post]
 
   def index
