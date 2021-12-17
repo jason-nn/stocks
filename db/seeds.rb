@@ -39,14 +39,14 @@ jason.transactions.create(action: 'cash in', amount: 2000)
 
 jason.transactions.create(
   action: 'purchase',
-  amount: -420.69,
+  amount: -1800,
   stock: 'TSLA',
   quantity: 2,
 )
 
 jason.transactions.create(
   action: 'sale',
-  amount: 300,
+  amount: 1000,
   stock: 'TSLA',
   quantity: 1,
 )

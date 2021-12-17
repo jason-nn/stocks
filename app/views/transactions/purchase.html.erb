@@ -6,7 +6,7 @@
   <%= form_with(model: @transaction, url: "/purchase/" + @company + "/" + @price.to_s) do |f| %>
     <div>
       <%= f.label :quantity, "Quantity" %>
-      <%= f.number_field :quantity, step: 1 %>
+      <%= f.number_field :quantity, step: 1, min: 1 %>
     </div>
     <div>
       <%= f.submit "Purchase" %>

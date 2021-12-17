@@ -176,7 +176,8 @@ input[type='number'] {
 
 input[type='email']:focus,
 input[type='text']:focus,
-input[type='password']:focus {
+input[type='password']:focus,
+input[type='number']:focus {
   outline: none;
   border: 1px solid #4f42ec;
 }

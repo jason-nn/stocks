@@ -5,6 +5,7 @@ class TransactionsController < ApplicationController
   before_action :set_client,
                 only: %i[buy purchase purchase_post sell sale sale_post]
   before_action :set_balance, only: %i[purchase_post]
+  before_action :set_portfolio, only: %i[sell sale sale_post]
 
   def index
     if current_user.admin
@@ -60,7 +61,7 @@ class TransactionsController < ApplicationController
                         ' ' + @transaction.stock + ' stock '
       else
         redirect_to '/purchase/' + params[:company] + '/' + @price.to_s,
-                    alert: 'Invalid amount.'
+                    alert: 'Invalid input.'
       end
     else
       redirect_to '/purchase/' + params[:company] + '/' + @price.to_s,
@@ -70,9 +71,31 @@ class TransactionsController < ApplicationController
 
   def sell; end
 
-  def sale; end
+  def sale
+    @company = params[:company]
+    @price = (params[:price].to_s + '.' + params[:format].to_s).to_f
+    @transaction = Transaction.new
+  end
 
-  def sale_post; end
+  def sale_post
+    @price = (params[:price].to_s + '.' + params[:format].to_s).to_f
+    @quantity = params[:transaction][:quantity].to_i
+    @transaction = Transaction.new(sale_params)
+
+    @transaction.stock = params[:company]
+    @transaction.quantity = @quantity
+    @transaction.amount = @price * @quantity
+
+    if @transaction.save
+      redirect_to root_path,
+                  notice:
+                    'Successfully sold ' + @transaction.quantity.to_s + ' ' +
+                      @transaction.stock + ' stock '
+    else
+      redirect_to '/sale/' + params[:company] + '/' + @price.to_s,
+                  alert: 'Invalid input.'
+    end
+  end
 
   def portfolio; end
 
@@ -104,8 +127,40 @@ class TransactionsController < ApplicationController
       .merge(user_id: @user_id, action: 'purchase')
   end
 
+  def sale_params
+    params
+      .require(:transaction)
+      .permit(:quantity)
+      .merge(user_id: @user_id, action: 'sale')
+  end
+
   def set_balance
     @balance = Transaction.where(user_id: @user_id).pluck(:amount).sum
+  end
+
+  def set_portfolio
+    transactions =
+      Transaction.where(user_id: @user_id).where.not(action: 'cash in')
+
+    portfolio = {}
+
+    transactions.each do |transaction|
+      if portfolio[transaction.stock]
+        if transaction.action = 'purchase'
+          portfolio[transaction.stock] += transaction.quantity
+        elsif transaction.action = 'sale'
+          portfolio[transaction.stock] -= transaction.quantity
+        end
+      else
+        if transaction.action = 'purchase'
+          portfolio[transaction.stock] = transaction.quantity
+        elsif transaction.action = 'sale'
+          portfolio[transaction.stock] = -transaction.quantity
+        end
+      end
+    end
+
+    @portfolio = portfolio
   end
 
   def set_client

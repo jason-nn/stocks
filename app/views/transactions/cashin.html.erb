@@ -3,7 +3,7 @@
   <%= form_with(model: @transaction, url: "/cashin") do |f| %>
     <div>
       <%= f.label :amount, "Amount in USD" %>
-      <%= f.number_field :amount, step: 0.01 %>
+      <%= f.number_field :amount, step: 0.01, min: 0.01 %>
     </div>
     <div>
       <%= f.submit "Cash In" %>

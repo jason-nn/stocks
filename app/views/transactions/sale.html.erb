@@ -1,0 +1,16 @@
+<h1>Sell</h1>
+<div class="box">
+  <h2><%= @company %></h2>
+  <br>
+  <h1 class="purple"><%= number_to_currency(@price) %></h1>
+  <%= form_with(model: @transaction, url: "/sale/" + @company + "/" + @price.to_s) do |f| %>
+    <div>
+      <%= f.label :quantity, "Quantity (maximum of " + (@portfolio[@company]).to_s + ")" %>
+      <%= f.number_field :quantity, step: 1, in: 1..@portfolio[@company] %>
+    </div>
+    <div>
+      <%= f.submit "Sell" %>
+    </div>
+  <% end %>
+</div>
+<%= link_to 'Back', sell_path, :class => 'button' %>

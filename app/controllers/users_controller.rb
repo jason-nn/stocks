@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_action :check_non_admin, only: %i[account]
   before_action :set_user, only: %i[show edit update]
   before_action :set_client, only: %i[portfolio]
+  before_action :set_portfolio, only: %i[portfolio]
 
   def index
     @users = User.where(admin: false).order('created_at DESC')
@@ -25,29 +26,7 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  def portfolio
-    @transactions = Transaction.where(user_id: 2).where.not(action: 'cash in')
-
-    portfolio = {}
-
-    @transactions.each do |transaction|
-      if portfolio[transaction.stock]
-        if transaction.action = 'purchase'
-          portfolio[transaction.stock] += transaction.quantity
-        elsif transaction.action = 'sale'
-          portfolio[transaction.stock] -= transaction.quantity
-        end
-      else
-        if transaction.action = 'purchase'
-          portfolio[transaction.stock] = transaction.quantity
-        elsif transaction.action = 'sale'
-          portfolio[transaction.stock] = -transaction.quantity
-        end
-      end
-    end
-
-    @portfolio = portfolio
-  end
+  def portfolio; end
 
   private
 
@@ -72,6 +51,31 @@ class UsersController < ApplicationController
       .require(:user)
       .permit(:email, :password, :password_confirmation, :admin, :approved)
       .merge(user_id: @user_id)
+  end
+
+  def set_portfolio
+    transactions =
+      Transaction.where(user_id: @user_id).where.not(action: 'cash in')
+
+    portfolio = {}
+
+    transactions.each do |transaction|
+      if portfolio[transaction.stock]
+        if transaction.action = 'purchase'
+          portfolio[transaction.stock] += transaction.quantity
+        elsif transaction.action = 'sale'
+          portfolio[transaction.stock] -= transaction.quantity
+        end
+      else
+        if transaction.action = 'purchase'
+          portfolio[transaction.stock] = transaction.quantity
+        elsif transaction.action = 'sale'
+          portfolio[transaction.stock] = -transaction.quantity
+        end
+      end
+    end
+
+    @portfolio = portfolio
   end
 
   def set_client
