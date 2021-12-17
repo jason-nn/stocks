@@ -42,7 +42,7 @@ class TransactionsController < ApplicationController
 
   def buy
     # @companies = %w[AAPL ABNB AMZN GOOG GRAB MSFT TSLA UBER]
-    @companies = %w[AAPL TSLA UBER]
+    @companies = %w[AAPL TSLA]
   end
 
   def purchase
