@@ -1,10 +1,12 @@
 <h1>Portfolio</h1>
+<% sum = 0 %>
 <% @portfolio.each do |stock, quantity| %>
   <div class="box">
     <h2><%= stock %></h2>
     <br>
     <% details = @client.quote(stock) %>
     <h1 class='purple'><%= number_to_currency(details.latest_price * quantity) %></h1>
+    <% sum += details.latest_price * quantity %>
     <br>
     <table>
       <tr>
@@ -26,3 +28,5 @@
     </table>
   </div>
 <% end %>
+<br>
+<h1 class='purple'>Total Value: <%= number_to_currency(sum) %></h1>
