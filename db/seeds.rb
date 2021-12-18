@@ -24,11 +24,29 @@ jason =
     name: 'Jason Ho',
   )
 
-pg =
+paul =
   User.create(
-    email: 'pg@stocks.com',
+    email: 'paul@stocks.com',
     password: 'password',
     admin: false,
     approved: false,
     name: 'Paul Graham',
+  )
+
+sam =
+  User.create(
+    email: 'sam@stocks.com',
+    password: 'password',
+    admin: false,
+    approved: false,
+    name: 'Sam Altman',
+  )
+
+michael =
+  User.create(
+    email: 'michael@stocks.com',
+    password: 'password',
+    admin: false,
+    approved: false,
+    name: 'Michael Seibel',
   )
