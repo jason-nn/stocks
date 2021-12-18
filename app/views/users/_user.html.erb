@@ -29,6 +29,7 @@
         </td>
         <td><%= link_to 'Details', user_path(user) %></td>
         <td><%= link_to 'Edit', '/user/' + user.id.to_s + '/edit' %></td>
+        <td><%= link_to 'Approve', '/approve/' + user.id.to_s, :class => 'button', method: :patch %></td>
       </tr>
     </table>
   </div>

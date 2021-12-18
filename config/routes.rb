@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   get '/user/:id/edit', to: 'users#edit'
   patch '/user/:id/edit', to: 'users#update'
   get '/restricted', to: 'users#restricted'
+  patch '/approve/:id', to: 'users#approve'
 end

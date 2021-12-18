@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user_id
-  before_action :check_admin, only: %i[index show new create edit update]
+  before_action :check_admin,
+                only: %i[index show new create edit update approve]
   before_action :check_non_admin, only: %i[account]
   before_action :set_user, only: %i[show edit update]
   before_action :set_client, only: %i[portfolio]
@@ -42,6 +43,12 @@ class UsersController < ApplicationController
   def account
     @balance = Transaction.where(user_id: @user_id).pluck(:amount).sum
     @user = current_user
+  end
+
+  def approve
+    @user = User.find(params[:id])
+    @user.update(approved: true)
+    redirect_to users_path, notice: @user.email + ' has been approved'
   end
 
   def portfolio; end
