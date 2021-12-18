@@ -50,3 +50,12 @@ michael =
     approved: false,
     name: 'Michael Seibel',
   )
+
+geoff =
+  User.create(
+    email: 'geoff@stocks.com',
+    password: 'password',
+    admin: false,
+    approved: false,
+    name: 'Geoff Ralston',
+  )
