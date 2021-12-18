@@ -33,20 +33,20 @@ pg =
     name: 'Paul Graham',
   )
 
-pg.transactions.create(action: 'cash in', amount: 1000)
+# pg.transactions.create(action: 'cash in', amount: 1000)
 
-jason.transactions.create(action: 'cash in', amount: 2000)
+# jason.transactions.create(action: 'cash in', amount: 2000)
 
-jason.transactions.create(
-  action: 'purchase',
-  amount: -1800,
-  stock: 'TSLA',
-  quantity: 2,
-)
+# jason.transactions.create(
+#   action: 'purchase',
+#   amount: -1800,
+#   stock: 'TSLA',
+#   quantity: 2,
+# )
 
-jason.transactions.create(
-  action: 'sale',
-  amount: 1000,
-  stock: 'TSLA',
-  quantity: 1,
-)
+# jason.transactions.create(
+#   action: 'sale',
+#   amount: 1000,
+#   stock: 'TSLA',
+#   quantity: 1,
+# )

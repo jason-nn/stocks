@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   post '/user/new', to: 'users#create'
   get '/user/:id/edit', to: 'users#edit'
   patch '/user/:id/edit', to: 'users#update'
+  get '/restricted', to: 'users#restricted'
 end

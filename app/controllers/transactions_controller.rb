@@ -16,6 +16,18 @@ class TransactionsController < ApplicationController
                 only: %i[buy purchase purchase_post sell sale sale_post]
   before_action :set_balance, only: %i[purchase_post]
   before_action :set_portfolio, only: %i[sell sale sale_post]
+  before_action :check_approved,
+                only: %i[
+                  index
+                  cashin
+                  cashin_post
+                  buy
+                  purchase
+                  purchase_post
+                  sell
+                  sale
+                  sale_post
+                ]
 
   def index
     if current_user.admin
@@ -119,6 +131,10 @@ class TransactionsController < ApplicationController
 
   def check_non_admin
     redirect_to root_path if current_user.admin
+  end
+
+  def check_approved
+    redirect_to restricted_path if !current_user.approved
   end
 
   def cashin_params

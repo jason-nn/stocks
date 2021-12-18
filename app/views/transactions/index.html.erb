@@ -1,2 +1,7 @@
 <h1>Transactions</h1>
 <%= render @transactions %>
+<% if @transactions.length < 1 %>
+  <div class="box">
+    <h2>No transactions have been made yet.</h2>
+  </div>
+<% end %>

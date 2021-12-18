@@ -9,5 +9,5 @@ class User < ApplicationRecord
 
   has_many :transactions
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, uniqueness: true, allow_nil: true
 end

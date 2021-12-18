@@ -6,6 +6,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update]
   before_action :set_client, only: %i[portfolio]
   before_action :set_portfolio, only: %i[portfolio]
+  before_action :check_approved,
+                only: %i[index show new create edit update account portfolio]
 
   def index
     @users = User.where(admin: false).order('created_at DESC')
@@ -60,6 +62,10 @@ class UsersController < ApplicationController
 
   def check_non_admin
     redirect_to root_path if current_user.admin
+  end
+
+  def check_approved
+    redirect_to restricted_path if !current_user.approved
   end
 
   def user_params
