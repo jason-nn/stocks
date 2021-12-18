@@ -1,33 +1,41 @@
 <h1>Portfolio</h1>
 <% sum = 0 %>
-<% @portfolio.each do |stock, quantity| %>
-  <div class="box">
-    <h2><%= stock %></h2>
-    <br>
-    <% details = @client.quote(stock) %>
-    <h1 class='purple'><%= number_to_currency(details.latest_price * quantity) %></h1>
-    <% sum += details.latest_price * quantity %>
-    <br>
-    <table>
-      <tr>
-        <td>
-          Quantity: 
-        </td>
-        <td>
-          <%= quantity %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Latest Price: 
-        </td>
-        <td>
-          <%= number_to_currency(details.latest_price) %>
-        </td>
-      </tr>
-    </table>
-  </div>
-<% end %>
+<div class="grid">
+  <% @portfolio.each do |stock, quantity| %>
+    <div class="box">
+      <h2><%= stock %></h2>
+      <br>
+      <% details = @client.quote(stock) %>
+      <% if details.change_percent > 0 %>
+        <h1 class='green'><%= number_to_currency(details.latest_price * quantity) %></h1>
+      <% elsif details.change_percent < 0 %>
+        <h1 class='red'><%= number_to_currency(details.latest_price * quantity) %></h1>
+      <% else %>
+        <h1 class='purple'><%= number_to_currency(details.latest_price * quantity) %></h1>
+      <% end %>
+      <% sum += details.latest_price * quantity %>
+      <br>
+      <table>
+        <tr>
+          <td>
+            Quantity: 
+          </td>
+          <td>
+            <%= quantity %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Latest Price: 
+          </td>
+          <td>
+            <%= number_to_currency(details.latest_price) %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  <% end %>
+</div>
 <% if @portfolio.length < 1 %>
   <div class="box">
     <h2>No stocks in portfolio yet.</h2>

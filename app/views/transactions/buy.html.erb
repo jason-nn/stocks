@@ -1,17 +1,19 @@
 <h1>Buy Stocks</h1>
-<% @companies.each do |company| %>
-  <div class="box">
-    <h2><%= company %></h2>
-    <br>
-    <% details = @client.quote(company) %>
-    <% if details.change_percent > 0 %>
-      <h1 class='green'><%= number_to_currency(details.latest_price) %></h1>
-    <% elsif details.change_percent < 0 %>
-      <h1 class='red'><%= number_to_currency(details.latest_price) %></h1>
-    <% else %>
-      <h1 class='purple'><%= number_to_currency(details.latest_price) %></h1>
-    <% end %>
-    <br>
-    <%= link_to 'Purchase', '/purchase/' + company + '/' + details.latest_price.to_s, :class => 'button' %>
-  </div>
-<% end %>
+<div class="grid">
+  <% @companies.each do |company| %>
+    <div class="box">
+      <h2><%= company %></h2>
+      <br>
+      <% details = @client.quote(company) %>
+      <% if details.change_percent > 0 %>
+        <h1 class='green'><%= number_to_currency(details.latest_price) %></h1>
+      <% elsif details.change_percent < 0 %>
+        <h1 class='red'><%= number_to_currency(details.latest_price) %></h1>
+      <% else %>
+        <h1 class='purple'><%= number_to_currency(details.latest_price) %></h1>
+      <% end %>
+      <br>
+      <%= link_to 'Purchase', '/purchase/' + company + '/' + details.latest_price.to_s, :class => 'button' %>
+    </div>
+  <% end %>
+</div>

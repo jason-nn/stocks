@@ -87,21 +87,21 @@ class UsersController < ApplicationController
 
     transactions.each do |transaction|
       if portfolio[transaction.stock]
-        if transaction.action = 'purchase'
+        if transaction.action == 'purchase'
           portfolio[transaction.stock] += transaction.quantity
-        elsif transaction.action = 'sale'
+        elsif transaction.action == 'sale'
           portfolio[transaction.stock] -= transaction.quantity
         end
       else
-        if transaction.action = 'purchase'
+        if transaction.action == 'purchase'
           portfolio[transaction.stock] = transaction.quantity
-        elsif transaction.action = 'sale'
+        elsif transaction.action == 'sale'
           portfolio[transaction.stock] = -transaction.quantity
         end
       end
     end
 
-    @portfolio = portfolio
+    @portfolio = portfolio.select { |k, v| v > 0 }
   end
 
   def set_client

@@ -269,3 +269,10 @@ img {
 .paddingtop15 {
   padding-top: 15px;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  column-gap: 40px;
+}
