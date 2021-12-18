@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   get '/sell', to: 'transactions#sell'
   get '/sale/:company/:price', to: 'transactions#sale'
   post '/sale/:company/:price', to: 'transactions#sale_post'
+  get '/user/new', to: 'users#new'
+  post '/user/new', to: 'users#create'
 end

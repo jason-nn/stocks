@@ -1,0 +1,21 @@
+<div class="box">
+  <h2>New User</h2>
+  <%= form_with(model: @user, url: "/user/new") do |f| %>
+    <div>
+      <%= f.label :name, "Name" %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <%= f.label :email, "Email" %>
+      <%= f.email_field :email %>
+    </div>
+    <div>
+      <%= f.label :password, "Password" %>
+      <%= f.password_field :password %>
+    </div>
+    <div>
+      <%= f.submit "Create User" %>
+    </div>
+  <% end %>
+</div>
+<%= link_to 'Back', users_path, :class => 'button' %>
