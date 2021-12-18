@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   post '/sale/:company/:price', to: 'transactions#sale_post'
   get '/user/new', to: 'users#new'
   post '/user/new', to: 'users#create'
+  get '/user/:id/edit', to: 'users#edit'
+  patch '/user/:id/edit', to: 'users#update'
 end

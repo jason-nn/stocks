@@ -29,7 +29,13 @@ class UsersController < ApplicationController
 
   def edit; end
 
-  def update; end
+  def update
+    if @user.update(user_params)
+      redirect_to user_path(@user.id), notice: 'User was successfully updated.'
+    else
+      redirect_to '/user/' + @user.id.to_s + '/edit', alert: 'Invalid input.'
+    end
+  end
 
   def account
     @balance = Transaction.where(user_id: @user_id).pluck(:amount).sum

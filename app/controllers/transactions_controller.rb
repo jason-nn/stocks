@@ -29,7 +29,7 @@ class TransactionsController < ApplicationController
                     'Successfully added ' +
                       view_context.number_to_currency(@transaction.amount)
     else
-      redirect_to cashin_path, alert: 'Invalid amount.'
+      redirect_to cashin_path, alert: 'Invalid input.'
     end
   end
 

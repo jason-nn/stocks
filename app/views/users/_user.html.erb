@@ -11,7 +11,7 @@
           </span>
         </td>
         <td><%= link_to 'Details', user_path(user) %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Edit', '/user/' + user.id.to_s + '/edit' %></td>
       </tr>
     </table>
   </div>
@@ -28,7 +28,7 @@
           </span>
         </td>
         <td><%= link_to 'Details', user_path(user) %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Edit', '/user/' + user.id.to_s + '/edit' %></td>
       </tr>
     </table>
   </div>
