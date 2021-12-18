@@ -15,3 +15,10 @@
     <%= link_to 'Sell', '/sale/' + stock + '/' + details.latest_price.to_s, :class => 'button' %>
   </div>
 <% end %>
+<% if @portfolio.length < 1 %>
+  <div class="box">
+    <h2>No stocks to sell yet.</h2>
+    <br>
+    <%= link_to 'Buy some here!', buy_path, :class => 'button' %>
+  </div>
+<% end %>

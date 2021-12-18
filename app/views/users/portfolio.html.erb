@@ -28,6 +28,13 @@
     </table>
   </div>
 <% end %>
+<% if @portfolio.length < 1 %>
+  <div class="box">
+    <h2>No stocks in portfolio yet.</h2>
+    <br>
+    <%= link_to 'Buy some here!', buy_path, :class => 'button' %>
+  </div>
+<% end %>
 <div class="box">
   <h1 class='purple'>Total Value: <%= number_to_currency(sum) %></h1>
 </div>
